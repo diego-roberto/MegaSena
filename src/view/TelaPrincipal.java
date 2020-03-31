@@ -10,8 +10,7 @@ import main.Gerador;
 
 public class TelaPrincipal extends javax.swing.JFrame {
    
-        Gerador[] gerador;
-        int[] aposta;
+    Gerador chamaGerador = new Gerador();                
         
     public TelaPrincipal() {
         initComponents();
@@ -86,10 +85,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtResultadoActionPerformed
 
     private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
-        int numMax = (Integer) spnQuantidadeNum.getValue();
-        gerador = new Gerador[numMax];
-        String resultado = Arrays.toString(gerador);
-        txtResultado.setText(resultado); 
+        txtResultado.setText("");
+        Integer numMax = (Integer) spnQuantidadeNum.getValue();        
+        Integer[] aposta = chamaGerador.criaAposta(numMax);
+                
+        String resultadoTxt = Arrays.toString(aposta);
+        txtResultado.setText(resultadoTxt); 
     }//GEN-LAST:event_btnGerarActionPerformed
 
 
