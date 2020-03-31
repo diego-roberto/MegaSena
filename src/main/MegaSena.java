@@ -1,45 +1,54 @@
 package main;
-import java.util.Random;
+
+/*
+@author Diego Roberto <github.com/diego-roberto>
+*/
+
 import java.util.Arrays;
- // @author Diego Roberto
-public class MegaSena {
-    public static void main(String[] args) {
-        // gerador automático de números aleatórios para aposta com 6 números
-        
-        int[] aposta = new int[6];  //preenche array com valores (já aleatórios)
-        
+import java.util.Random;
+
+public class Gerador {
+
+    public Integer[] criaAposta(Integer numMax) {
+
+        // gerador automático de números aleatórios para apostas com 6 até 15 números
+                
+        Integer[] aposta = new Integer[numMax];
+
+        //preenche vetor
         for (int i = 0; i < aposta.length; i++) {
-            aposta[i] = new Random().nextInt(60) + 1;            
-        }        
-        
-        for (int i = 0; i < aposta.length; i++) {   //testa repetições de valores
-            int numTemp = aposta[i];            
-            if (contains(aposta, numTemp)) {
-                numTemp = new Random().nextInt(60) + 1; //se já existe o valor, gera e testa outro
-                if (contains(aposta, numTemp)) {
+            aposta[i] = 0;
+        }
+        //testa repetição de valores
+        for (int i = 0; i < aposta.length; i++) {            
+            int loopCheck = numMax;
+            do {
+                Integer numTemp = new Random().nextInt(60) + 1;
+                if (Contains(aposta, numTemp)) {
                     numTemp = new Random().nextInt(60) + 1;
+                } else {
                     aposta[i] = numTemp;
+                    loopCheck--;
                 }
-            aposta[i] = numTemp;
-            }
-        }        
-        
+            } while (loopCheck > 0); //só para quando todos os valores forem únicos no vetor aposta
+        }
+
         Arrays.sort(aposta); //organiza em ordem crescente
         
-        for (int i = 0; i < aposta.length; i++) {
-            System.out.println(aposta[i]);
-        }
-    }    
-    public static boolean contains(final int[] array, final int value) {
+        return aposta;
         
+    }
+    
+    public static boolean Contains(final Integer[] array, final int value) {
+
         boolean result = false;
-        
-        for(int i : array){
-            if(i == value){
+
+        for (int i : array) { //testa com todos os itens do array
+            if (i == value) {
                 result = true;
                 break;
             }
         }
-        return result;    
+        return result;
     }
 }
